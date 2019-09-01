@@ -20,7 +20,7 @@ int main() {
         "signal"_a = signal,
     };
 
-    // Execute Python code, using the local C++ variables
+    // Execute Python code, using the variables saved in `locals`
     py::exec(R"(
     
     import matplotlib.pyplot as plt
