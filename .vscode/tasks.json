@@ -1,0 +1,52 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Build",
+            "command": "make -j$(($(nproc) * 2))",
+            "options": {
+                "cwd": "${workspaceFolder}/build",
+            },
+            "problemMatcher": "$gcc",
+            "group": {
+                "kind": "build",
+                "isDefault": true,
+            },
+        },
+        {
+            "type": "shell",
+            "label": "Build & Run",
+            "command": "./main",
+            "options": {
+                "cwd": "${workspaceFolder}/build",
+            },
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true,
+            },
+            "dependsOn": "Build",
+        },
+        {
+            "type": "shell",
+            "label": "Clean",
+            "command": "make clean",
+            "options": {
+                "cwd": "${workspaceFolder}/build",
+            },
+            "problemMatcher": [],
+        },
+        {
+            "type": "shell",
+            "label": "Clear build Directory and Run CMake",
+            "command": "mkdir -p build && cd build && rm -rf ./* && cmake .. -DPYTHON_EXECUTABLE=$(which python3)",
+            "options": {
+                "cwd": "${workspaceFolder}",
+            },
+            "problemMatcher": [],
+        },
+    ]
+}
