@@ -3,8 +3,8 @@
 I had to write some code in C++ where I wanted to plot the results of a 
 signal processing function.  
 The existing C++ plotting libraries had quite a learning curve, and I was 
-already familiar with Python's Matplotlib already, so I didn't want to learn an
-entirely new library.  
+already familiar with Python's Matplotlib, so I didn't want to learn an entirely
+new library.  
 I then found [matplotlib-cpp](https://github.com/lava/matplotlib-cpp), C++ 
 bindings for Matplotlib. It worked fine, but was quite limited.  
 However, that gave me the idea to use pybind11 to call Python Matplotlib code
@@ -46,7 +46,9 @@ You'll also need Matplotlib for the plots:
 python3 -m pip install --user matplotlib
 ~~~
 
-Next, install pybind11:
+Next, install pybind11. You can install it system-wide or for your user only.
+
+**System-wide**
 
 ~~~sh
 cd /tmp
@@ -54,10 +56,18 @@ git clone https://github.com/pybind/pybind11 --depth=1
 mkdir pybind11/build && cd pybind11/build
 cmake .. -DPYBIND11_TEST=OFF
 sudo make install
-# Install without sudo
-# cmake .. -DPYBIND11_TEST=OFF -DCMAKE_INSTALL_PREFIX=$HOME/.local
-# make install
-# echo "export CMAKE_PREFIX_PATH=$HOME/.local/lib/cmake" >> ~/.profile # TODO: check
+~~~
+
+**Local**
+
+~~~sh
+cd /tmp
+git clone https://github.com/pybind/pybind11 --depth=1
+mkdir pybind11/build && cd pybind11/build
+cmake .. -DPYBIND11_TEST=OFF -DCMAKE_INSTALL_PREFIX=$HOME/.local
+make install
+echo "export CMAKE_PREFIX_PATH=\$HOME/.local/lib/cmake" >> ~/.profile
+source ~/.profile
 ~~~
 
 Finally, just clone this repository:
